@@ -1,0 +1,987 @@
+Lote 0
+Família: 3
+Produtos: (1,)
+Peso: 15.2
+Tempo: 70
+A: 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 1
+Família: 3
+Produtos: (11,)
+Peso: 17.9
+Tempo: 70
+A: 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 2
+Família: 3
+Produtos: (23,)
+Peso: 23.2
+Tempo: 70
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0
+
+Lote 3
+Família: 3
+Produtos: (1, 11)
+Peso: 33.099999999999994
+Tempo: 70
+A: 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 4
+Família: 3
+Produtos: (1, 23)
+Peso: 38.4
+Tempo: 70
+A: 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0
+
+Lote 5
+Família: 3
+Produtos: (11, 23)
+Peso: 41.099999999999994
+Tempo: 70
+A: 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0
+
+Lote 6
+Família: 3
+Produtos: (1, 11, 23)
+Peso: 56.3
+Tempo: 70
+A: 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0
+
+Lote 7
+Família: 1
+Produtos: (2,)
+Peso: 8.8
+Tempo: 60
+A: 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 8
+Família: 1
+Produtos: (9,)
+Peso: 11.1
+Tempo: 60
+A: 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 9
+Família: 1
+Produtos: (17,)
+Peso: 20.8
+Tempo: 60
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 10
+Família: 1
+Produtos: (25,)
+Peso: 11.7
+Tempo: 60
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
+
+Lote 11
+Família: 1
+Produtos: (2, 9)
+Peso: 19.9
+Tempo: 60
+A: 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 12
+Família: 1
+Produtos: (2, 17)
+Peso: 29.6
+Tempo: 60
+A: 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 13
+Família: 1
+Produtos: (2, 25)
+Peso: 20.5
+Tempo: 60
+A: 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
+
+Lote 14
+Família: 1
+Produtos: (9, 17)
+Peso: 31.9
+Tempo: 60
+A: 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 15
+Família: 1
+Produtos: (9, 25)
+Peso: 22.799999999999997
+Tempo: 60
+A: 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
+
+Lote 16
+Família: 1
+Produtos: (17, 25)
+Peso: 32.5
+Tempo: 60
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0
+
+Lote 17
+Família: 1
+Produtos: (2, 9, 17)
+Peso: 40.7
+Tempo: 60
+A: 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 18
+Família: 1
+Produtos: (2, 9, 25)
+Peso: 31.6
+Tempo: 60
+A: 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
+
+Lote 19
+Família: 1
+Produtos: (2, 17, 25)
+Peso: 41.3
+Tempo: 60
+A: 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0
+
+Lote 20
+Família: 1
+Produtos: (9, 17, 25)
+Peso: 43.6
+Tempo: 60
+A: 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0
+
+Lote 21
+Família: 1
+Produtos: (2, 9, 17, 25)
+Peso: 52.4
+Tempo: 60
+A: 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0
+
+Lote 22
+Família: 5
+Produtos: (3,)
+Peso: 24.1
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 23
+Família: 5
+Produtos: (13,)
+Peso: 9.5
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 24
+Família: 5
+Produtos: (16,)
+Peso: 16.2
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 25
+Família: 5
+Produtos: (20,)
+Peso: 15.1
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+Lote 26
+Família: 5
+Produtos: (24,)
+Peso: 8.6
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+
+Lote 27
+Família: 5
+Produtos: (29,)
+Peso: 22.4
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+
+Lote 28
+Família: 5
+Produtos: (3, 13)
+Peso: 33.6
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 29
+Família: 5
+Produtos: (3, 16)
+Peso: 40.3
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 30
+Família: 5
+Produtos: (3, 20)
+Peso: 39.2
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+Lote 31
+Família: 5
+Produtos: (3, 24)
+Peso: 32.7
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+
+Lote 32
+Família: 5
+Produtos: (3, 29)
+Peso: 46.5
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+
+Lote 33
+Família: 5
+Produtos: (13, 16)
+Peso: 25.7
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 34
+Família: 5
+Produtos: (13, 20)
+Peso: 24.6
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+Lote 35
+Família: 5
+Produtos: (13, 24)
+Peso: 18.1
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+
+Lote 36
+Família: 5
+Produtos: (13, 29)
+Peso: 31.9
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+
+Lote 37
+Família: 5
+Produtos: (16, 20)
+Peso: 31.299999999999997
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+Lote 38
+Família: 5
+Produtos: (16, 24)
+Peso: 24.799999999999997
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+
+Lote 39
+Família: 5
+Produtos: (16, 29)
+Peso: 38.599999999999994
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+
+Lote 40
+Família: 5
+Produtos: (20, 24)
+Peso: 23.7
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0
+
+Lote 41
+Família: 5
+Produtos: (20, 29)
+Peso: 37.5
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0
+
+Lote 42
+Família: 5
+Produtos: (24, 29)
+Peso: 31.0
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0
+
+Lote 43
+Família: 5
+Produtos: (3, 13, 16)
+Peso: 49.8
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 44
+Família: 5
+Produtos: (3, 13, 20)
+Peso: 48.7
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+Lote 45
+Família: 5
+Produtos: (3, 13, 24)
+Peso: 42.2
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+
+Lote 46
+Família: 5
+Produtos: (3, 13, 29)
+Peso: 56.0
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+
+Lote 47
+Família: 5
+Produtos: (3, 16, 20)
+Peso: 55.4
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+Lote 48
+Família: 5
+Produtos: (3, 16, 24)
+Peso: 48.9
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+
+Lote 49
+Família: 5
+Produtos: (3, 20, 24)
+Peso: 47.8
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0
+
+Lote 50
+Família: 5
+Produtos: (3, 24, 29)
+Peso: 55.1
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0
+
+Lote 51
+Família: 5
+Produtos: (13, 16, 20)
+Peso: 40.8
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0
+
+Lote 52
+Família: 5
+Produtos: (13, 16, 24)
+Peso: 34.3
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+
+Lote 53
+Família: 5
+Produtos: (13, 16, 29)
+Peso: 48.099999999999994
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+
+Lote 54
+Família: 5
+Produtos: (13, 20, 24)
+Peso: 33.2
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0
+
+Lote 55
+Família: 5
+Produtos: (13, 20, 29)
+Peso: 47.0
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0
+
+Lote 56
+Família: 5
+Produtos: (13, 24, 29)
+Peso: 40.5
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0
+
+Lote 57
+Família: 5
+Produtos: (16, 20, 24)
+Peso: 39.9
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 0
+
+Lote 58
+Família: 5
+Produtos: (16, 20, 29)
+Peso: 53.699999999999996
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0
+
+Lote 59
+Família: 5
+Produtos: (16, 24, 29)
+Peso: 47.199999999999996
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 1 0
+
+Lote 60
+Família: 5
+Produtos: (20, 24, 29)
+Peso: 46.099999999999994
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 1 0
+
+Lote 61
+Família: 5
+Produtos: (3, 13, 16, 24)
+Peso: 58.4
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+
+Lote 62
+Família: 5
+Produtos: (3, 13, 20, 24)
+Peso: 57.3
+Tempo: 80
+A: 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0
+
+Lote 63
+Família: 5
+Produtos: (13, 16, 20, 24)
+Peso: 49.4
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 0
+
+Lote 64
+Família: 5
+Produtos: (13, 16, 24, 29)
+Peso: 56.699999999999996
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 1 0
+
+Lote 65
+Família: 5
+Produtos: (13, 20, 24, 29)
+Peso: 55.599999999999994
+Tempo: 80
+A: 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 1 0
+
+Lote 66
+Família: 7
+Produtos: (4,)
+Peso: 6.1
+Tempo: 65
+A: 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 67
+Família: 7
+Produtos: (8,)
+Peso: 27.5
+Tempo: 65
+A: 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 68
+Família: 7
+Produtos: (10,)
+Peso: 7.2
+Tempo: 65
+A: 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 69
+Família: 7
+Produtos: (19,)
+Peso: 10.4
+Tempo: 65
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 70
+Família: 7
+Produtos: (27,)
+Peso: 6.9
+Tempo: 65
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 71
+Família: 7
+Produtos: (4, 8)
+Peso: 33.6
+Tempo: 65
+A: 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 72
+Família: 7
+Produtos: (4, 10)
+Peso: 13.3
+Tempo: 65
+A: 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 73
+Família: 7
+Produtos: (4, 19)
+Peso: 16.5
+Tempo: 65
+A: 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 74
+Família: 7
+Produtos: (4, 27)
+Peso: 13.0
+Tempo: 65
+A: 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 75
+Família: 7
+Produtos: (8, 10)
+Peso: 34.7
+Tempo: 65
+A: 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 76
+Família: 7
+Produtos: (8, 19)
+Peso: 37.9
+Tempo: 65
+A: 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 77
+Família: 7
+Produtos: (8, 27)
+Peso: 34.4
+Tempo: 65
+A: 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 78
+Família: 7
+Produtos: (10, 19)
+Peso: 17.6
+Tempo: 65
+A: 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 79
+Família: 7
+Produtos: (10, 27)
+Peso: 14.100000000000001
+Tempo: 65
+A: 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 80
+Família: 7
+Produtos: (19, 27)
+Peso: 17.3
+Tempo: 65
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 81
+Família: 7
+Produtos: (4, 8, 10)
+Peso: 40.8
+Tempo: 65
+A: 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 82
+Família: 7
+Produtos: (4, 8, 19)
+Peso: 44.0
+Tempo: 65
+A: 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 83
+Família: 7
+Produtos: (4, 8, 27)
+Peso: 40.5
+Tempo: 65
+A: 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 84
+Família: 7
+Produtos: (4, 10, 19)
+Peso: 23.7
+Tempo: 65
+A: 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 85
+Família: 7
+Produtos: (4, 10, 27)
+Peso: 20.2
+Tempo: 65
+A: 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 86
+Família: 7
+Produtos: (4, 19, 27)
+Peso: 23.4
+Tempo: 65
+A: 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 87
+Família: 7
+Produtos: (8, 10, 19)
+Peso: 45.1
+Tempo: 65
+A: 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 88
+Família: 7
+Produtos: (8, 10, 27)
+Peso: 41.6
+Tempo: 65
+A: 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 89
+Família: 7
+Produtos: (8, 19, 27)
+Peso: 44.8
+Tempo: 65
+A: 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 90
+Família: 7
+Produtos: (10, 19, 27)
+Peso: 24.5
+Tempo: 65
+A: 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 91
+Família: 7
+Produtos: (4, 8, 10, 19)
+Peso: 51.2
+Tempo: 65
+A: 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 92
+Família: 7
+Produtos: (4, 8, 10, 27)
+Peso: 47.7
+Tempo: 65
+A: 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 93
+Família: 7
+Produtos: (4, 8, 19, 27)
+Peso: 50.9
+Tempo: 65
+A: 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 94
+Família: 7
+Produtos: (4, 10, 19, 27)
+Peso: 30.6
+Tempo: 65
+A: 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 95
+Família: 7
+Produtos: (8, 10, 19, 27)
+Peso: 52.0
+Tempo: 65
+A: 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 96
+Família: 7
+Produtos: (4, 8, 10, 19, 27)
+Peso: 58.1
+Tempo: 65
+A: 0 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0
+
+Lote 97
+Família: 4
+Produtos: (5,)
+Peso: 12.9
+Tempo: 50
+A: 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 98
+Família: 4
+Produtos: (12,)
+Peso: 21.3
+Tempo: 50
+A: 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 99
+Família: 4
+Produtos: (18,)
+Peso: 7.9
+Tempo: 50
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 100
+Família: 4
+Produtos: (26,)
+Peso: 19.5
+Tempo: 50
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+
+Lote 101
+Família: 4
+Produtos: (5, 12)
+Peso: 34.2
+Tempo: 50
+A: 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 102
+Família: 4
+Produtos: (5, 18)
+Peso: 20.8
+Tempo: 50
+A: 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 103
+Família: 4
+Produtos: (5, 26)
+Peso: 32.4
+Tempo: 50
+A: 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+
+Lote 104
+Família: 4
+Produtos: (12, 18)
+Peso: 29.200000000000003
+Tempo: 50
+A: 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 105
+Família: 4
+Produtos: (12, 26)
+Peso: 40.8
+Tempo: 50
+A: 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+
+Lote 106
+Família: 4
+Produtos: (18, 26)
+Peso: 27.4
+Tempo: 50
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+
+Lote 107
+Família: 4
+Produtos: (5, 12, 18)
+Peso: 42.1
+Tempo: 50
+A: 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 108
+Família: 4
+Produtos: (5, 12, 26)
+Peso: 53.7
+Tempo: 50
+A: 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+
+Lote 109
+Família: 4
+Produtos: (5, 18, 26)
+Peso: 40.3
+Tempo: 50
+A: 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+
+Lote 110
+Família: 4
+Produtos: (12, 18, 26)
+Peso: 48.7
+Tempo: 50
+A: 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0
+
+Lote 111
+Família: 2
+Produtos: (6,)
+Peso: 8.0
+Tempo: 45
+A: 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 112
+Família: 2
+Produtos: (14,)
+Peso: 13.8
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 113
+Família: 2
+Produtos: (21,)
+Peso: 5.0
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+
+Lote 114
+Família: 2
+Produtos: (28,)
+Peso: 14.2
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+
+Lote 115
+Família: 2
+Produtos: (6, 14)
+Peso: 21.8
+Tempo: 45
+A: 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 116
+Família: 2
+Produtos: (6, 21)
+Peso: 13.0
+Tempo: 45
+A: 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+
+Lote 117
+Família: 2
+Produtos: (6, 28)
+Peso: 22.2
+Tempo: 45
+A: 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+
+Lote 118
+Família: 2
+Produtos: (14, 21)
+Peso: 18.8
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+
+Lote 119
+Família: 2
+Produtos: (14, 28)
+Peso: 28.0
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+
+Lote 120
+Família: 2
+Produtos: (21, 28)
+Peso: 19.2
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0
+
+Lote 121
+Família: 2
+Produtos: (6, 14, 21)
+Peso: 26.8
+Tempo: 45
+A: 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+
+Lote 122
+Família: 2
+Produtos: (6, 14, 28)
+Peso: 36.0
+Tempo: 45
+A: 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+
+Lote 123
+Família: 2
+Produtos: (6, 21, 28)
+Peso: 27.2
+Tempo: 45
+A: 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0
+
+Lote 124
+Família: 2
+Produtos: (14, 21, 28)
+Peso: 33.0
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0
+
+Lote 125
+Família: 2
+Produtos: (6, 14, 21, 28)
+Peso: 41.0
+Tempo: 45
+A: 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0
+
+Lote 126
+Família: 6
+Produtos: (7,)
+Peso: 19.0
+Tempo: 45
+A: 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 127
+Família: 6
+Produtos: (15,)
+Peso: 3.0
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 128
+Família: 6
+Produtos: (22,)
+Peso: 18.8
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0
+
+Lote 129
+Família: 6
+Produtos: (30,)
+Peso: 9.1
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+
+Lote 130
+Família: 6
+Produtos: (7, 15)
+Peso: 22.0
+Tempo: 45
+A: 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+Lote 131
+Família: 6
+Produtos: (7, 22)
+Peso: 37.8
+Tempo: 45
+A: 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0
+
+Lote 132
+Família: 6
+Produtos: (7, 30)
+Peso: 28.1
+Tempo: 45
+A: 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+
+Lote 133
+Família: 6
+Produtos: (15, 22)
+Peso: 21.8
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0
+
+Lote 134
+Família: 6
+Produtos: (15, 30)
+Peso: 12.1
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+
+Lote 135
+Família: 6
+Produtos: (22, 30)
+Peso: 27.9
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1
+
+Lote 136
+Família: 6
+Produtos: (7, 15, 22)
+Peso: 40.8
+Tempo: 45
+A: 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0
+
+Lote 137
+Família: 6
+Produtos: (7, 15, 30)
+Peso: 31.1
+Tempo: 45
+A: 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+
+Lote 138
+Família: 6
+Produtos: (7, 22, 30)
+Peso: 46.9
+Tempo: 45
+A: 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1
+
+Lote 139
+Família: 6
+Produtos: (15, 22, 30)
+Peso: 30.9
+Tempo: 45
+A: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1
+
+Lote 140
+Família: 6
+Produtos: (7, 15, 22, 30)
+Peso: 49.9
+Tempo: 45
+A: 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1
+

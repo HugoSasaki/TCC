@@ -1,0 +1,19 @@
+NÚMERO DE PRODUTOS:5
+NÚMERO DE MÁQUINAS:4
+NÚMERO DE FAMÍLIAS:1
+--------------------
+NOME DO PRODUTO/PESO/FAMÍLIA:
+produto_1/2.5/1
+produto_2/7.0/1
+produto_3/1.2/1
+produto_4/10.0/1
+produto_5/4.5/1
+--------------------
+MÁQUINAS/CAPACIDADE:
+A/30
+B/25
+C/20
+D/50
+--------------------
+FAMÍLIA/TEMPO DE PROCESSAMENTO (min)/MÁQUINAS EM QUE É PROCESSADA (separadas por vírgula):
+1/45/A,B,C,D

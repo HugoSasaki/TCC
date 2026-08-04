@@ -1,0 +1,17 @@
+STATISTICS
+  Problem name     : Exercício 5(a) Lista Dualidade
+  Variables        : 6 (0 binary, 0 integer, 0 implicit integer, 6 continuous)
+  Constraints      : 2 initial, 2 maximal
+OBJECTIVE
+  Sense            : minimize
+VARIABLES
+  [continuous] <Kg do alimento 0>: obj=35, original bounds=[0,+inf]
+  [continuous] <Kg do alimento 1>: obj=30, original bounds=[0,+inf]
+  [continuous] <Kg do alimento 2>: obj=60, original bounds=[0,+inf]
+  [continuous] <Kg do alimento 3>: obj=50, original bounds=[0,+inf]
+  [continuous] <Kg do alimento 4>: obj=27, original bounds=[0,+inf]
+  [continuous] <Kg do alimento 5>: obj=22, original bounds=[0,+inf]
+CONSTRAINTS
+  [linear] <c1>: <Kg do alimento 0>[C] +2<Kg do alimento 2>[C] +2<Kg do alimento 3>[C] +<Kg do alimento 4>[C] +2<Kg do alimento 5>[C] >= 9;
+  [linear] <c2>: <Kg do alimento 1>[C] +3<Kg do alimento 2>[C] +<Kg do alimento 3>[C] +3<Kg do alimento 4>[C] +2<Kg do alimento 5>[C] >= 19;
+END

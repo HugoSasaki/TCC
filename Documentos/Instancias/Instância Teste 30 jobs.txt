@@ -1,0 +1,51 @@
+NÚMERO DE PRODUTOS:30
+NÚMERO DE MÁQUINAS:5
+NÚMERO DE FAMÍLIAS:7
+--------------------
+NOME DO PRODUTO/PESO/FAMÍLIA:
+produto_1/15.2/3
+produto_2/8.8/1
+produto_3/24.1/5
+produto_4/6.1/7
+produto_5/12.9/4
+produto_6/8.0/2
+produto_7/19.0/6
+produto_8/27.5/7
+produto_9/11.1/1
+produto_10/7.2/7
+produto_11/17.9/3
+produto_12/21.3/4
+produto_13/9.5/5
+produto_14/13.8/2
+produto_15/3.0/6
+produto_16/16.2/5
+produto_17/20.8/1
+produto_18/7.9/4
+produto_19/10.4/7
+produto_20/15.1/5
+produto_21/5.0/2
+produto_22/18.8/6
+produto_23/23.2/3
+produto_24/8.6/5
+produto_25/11.7/1
+produto_26/19.5/4
+produto_27/6.9/7
+produto_28/14.2/2
+produto_29/22.4/5
+produto_30/9.1/6
+--------------------
+MÁQUINAS/CAPACIDADE:
+A/40
+B/30
+C/50
+D/40
+E/60
+--------------------
+FAMÍLIA/TEMPO DE PROCESSAMENTO (min)/MÁQUINAS EM QUE É PROCESSADA (separadas por vírgula):
+1/60/A,C
+2/45/B,E
+3/70/A,D,E
+4/50/C,D
+5/80/B,C,E
+6/45/A,E
+7/65/B,D

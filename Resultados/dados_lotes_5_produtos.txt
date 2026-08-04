@@ -1,0 +1,217 @@
+Lote 0
+Família: 1
+Produtos: (1,)
+Peso: 2.5
+Tempo: 45
+A: 1 0 0 0 0
+
+Lote 1
+Família: 1
+Produtos: (2,)
+Peso: 7.0
+Tempo: 45
+A: 0 1 0 0 0
+
+Lote 2
+Família: 1
+Produtos: (3,)
+Peso: 1.2
+Tempo: 45
+A: 0 0 1 0 0
+
+Lote 3
+Família: 1
+Produtos: (4,)
+Peso: 10.0
+Tempo: 45
+A: 0 0 0 1 0
+
+Lote 4
+Família: 1
+Produtos: (5,)
+Peso: 4.5
+Tempo: 45
+A: 0 0 0 0 1
+
+Lote 5
+Família: 1
+Produtos: (1, 2)
+Peso: 9.5
+Tempo: 45
+A: 1 1 0 0 0
+
+Lote 6
+Família: 1
+Produtos: (1, 3)
+Peso: 3.7
+Tempo: 45
+A: 1 0 1 0 0
+
+Lote 7
+Família: 1
+Produtos: (1, 4)
+Peso: 12.5
+Tempo: 45
+A: 1 0 0 1 0
+
+Lote 8
+Família: 1
+Produtos: (1, 5)
+Peso: 7.0
+Tempo: 45
+A: 1 0 0 0 1
+
+Lote 9
+Família: 1
+Produtos: (2, 3)
+Peso: 8.2
+Tempo: 45
+A: 0 1 1 0 0
+
+Lote 10
+Família: 1
+Produtos: (2, 4)
+Peso: 17.0
+Tempo: 45
+A: 0 1 0 1 0
+
+Lote 11
+Família: 1
+Produtos: (2, 5)
+Peso: 11.5
+Tempo: 45
+A: 0 1 0 0 1
+
+Lote 12
+Família: 1
+Produtos: (3, 4)
+Peso: 11.2
+Tempo: 45
+A: 0 0 1 1 0
+
+Lote 13
+Família: 1
+Produtos: (3, 5)
+Peso: 5.7
+Tempo: 45
+A: 0 0 1 0 1
+
+Lote 14
+Família: 1
+Produtos: (4, 5)
+Peso: 14.5
+Tempo: 45
+A: 0 0 0 1 1
+
+Lote 15
+Família: 1
+Produtos: (1, 2, 3)
+Peso: 10.7
+Tempo: 45
+A: 1 1 1 0 0
+
+Lote 16
+Família: 1
+Produtos: (1, 2, 4)
+Peso: 19.5
+Tempo: 45
+A: 1 1 0 1 0
+
+Lote 17
+Família: 1
+Produtos: (1, 2, 5)
+Peso: 14.0
+Tempo: 45
+A: 1 1 0 0 1
+
+Lote 18
+Família: 1
+Produtos: (1, 3, 4)
+Peso: 13.7
+Tempo: 45
+A: 1 0 1 1 0
+
+Lote 19
+Família: 1
+Produtos: (1, 3, 5)
+Peso: 8.2
+Tempo: 45
+A: 1 0 1 0 1
+
+Lote 20
+Família: 1
+Produtos: (1, 4, 5)
+Peso: 17.0
+Tempo: 45
+A: 1 0 0 1 1
+
+Lote 21
+Família: 1
+Produtos: (2, 3, 4)
+Peso: 18.2
+Tempo: 45
+A: 0 1 1 1 0
+
+Lote 22
+Família: 1
+Produtos: (2, 3, 5)
+Peso: 12.7
+Tempo: 45
+A: 0 1 1 0 1
+
+Lote 23
+Família: 1
+Produtos: (2, 4, 5)
+Peso: 21.5
+Tempo: 45
+A: 0 1 0 1 1
+
+Lote 24
+Família: 1
+Produtos: (3, 4, 5)
+Peso: 15.7
+Tempo: 45
+A: 0 0 1 1 1
+
+Lote 25
+Família: 1
+Produtos: (1, 2, 3, 4)
+Peso: 20.7
+Tempo: 45
+A: 1 1 1 1 0
+
+Lote 26
+Família: 1
+Produtos: (1, 2, 3, 5)
+Peso: 15.2
+Tempo: 45
+A: 1 1 1 0 1
+
+Lote 27
+Família: 1
+Produtos: (1, 2, 4, 5)
+Peso: 24.0
+Tempo: 45
+A: 1 1 0 1 1
+
+Lote 28
+Família: 1
+Produtos: (1, 3, 4, 5)
+Peso: 18.2
+Tempo: 45
+A: 1 0 1 1 1
+
+Lote 29
+Família: 1
+Produtos: (2, 3, 4, 5)
+Peso: 22.7
+Tempo: 45
+A: 0 1 1 1 1
+
+Lote 30
+Família: 1
+Produtos: (1, 2, 3, 4, 5)
+Peso: 25.2
+Tempo: 45
+A: 1 1 1 1 1
+
