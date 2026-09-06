@@ -670,3 +670,5 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,jupyternotebooks,tex,latex,text
 
 *.zip
+
+benders/Benders(IA).py
