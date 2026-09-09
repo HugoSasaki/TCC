@@ -672,3 +672,5 @@ pyrightconfig.json
 *.zip
 
 benders/Benders(IA).py
+
+!/Resultados/Benders/*.log
