@@ -6,7 +6,7 @@ import time
 import csv
 import math
 
-arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 5 jobs.txt"
+arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 70 jobs.txt"
 pasta_resultados = Path(__file__).parent.parent / "Resultados" / "Benders"
 pasta_resultados.mkdir(parents=True, exist_ok=True)
 
@@ -177,6 +177,7 @@ def cria_lotes(capacidade, peso, produtos_por_familia, tempo_proc, familia_produ
 def cria_master(lotes_validos, produtos, A, L):
 
     modelo = Model("Master")
+    modelo.hideOutput()
 
     X = [None for n in range(len(lotes_validos))]
     for n in range(len(X)):
@@ -195,6 +196,7 @@ def cria_master(lotes_validos, produtos, A, L):
 def cria_sub(maquinas, lotes_utilizados, maquinas_familia, capacidade, T, P, familia_lote):
 
     modelo = Model("Sub")
+    modelo.hideOutput()
 
     y = {}
     for u in lotes_utilizados:
@@ -246,13 +248,43 @@ def salva_resultados_csv(arquivo_csv, dados):
 
         writer.writerow(dados)
 
-def lowerBound(T, tempo_proc, produtos_por_familia, peso, maquinas_familia):
+# def lowerBound(tempo_proc, produtos_por_familia, peso, maquinas_familia, capacidade):
+
+#     limites_familia = []
+
+#     for fam, produtos_fam in produtos_por_familia.items():
+
+#         tempo = tempo_proc[fam]
+#         peso_total = sum(peso[p] for p in produtos_fam)
+#         maquinas_disponiveis = maquinas_familia[fam]
+#         maior_capacidade = max(capacidade[m] for m in maquinas_disponiveis)
+#         numero_lotes = math.ceil(peso_total / maior_capacidade)
+#         numero_maquinas = len(maquinas_disponiveis)
+#         numero_camadas = math.ceil(numero_lotes / numero_maquinas)
+#         limite_familia = tempo * numero_camadas
+#         limites_familia.append(limite_familia)
+
+#     L = max(limites_familia)
+    
+#     return L
+
+def lowerBound(T, tempo_proc, produtos_por_familia, peso, maquinas_familia, capacidade):
 
     maior_tempo = max(T)
-    familia_maior_tempo = (k for k, v in tempo_proc.items() if v == maior_tempo)
-    peso_total = sum(v for k, v in peso.items() if k in produtos_por_familia[familia_maior_tempo])
-    maior_capacidade = (v for k, v in maquinas_familia.items() if k == familia_maior_tempo)
 
+    for k, v in tempo_proc.items():
+        if v == maior_tempo:
+            familia_maior_tempo = k 
+
+    peso_total = 0
+    for k, v in peso.items():
+        if k in produtos_por_familia[familia_maior_tempo]:
+            peso_total += v
+    
+    for k, v in maquinas_familia.items():
+        if k == familia_maior_tempo:
+            maior_capacidade = max(capacidade[valor] for valor in v)
+    
     div = math.ceil(peso_total/maior_capacidade)
     L = maior_tempo * div
 
@@ -262,19 +294,21 @@ def main(nome_arquivo):
 
     inst, peso, familia_produto, capacidade, tempo_proc, maquinas_familia, familia, produtos_por_familia = ler_instancia(nome_arquivo)
     T, P, lotes_validos, A, maquinas, produtos, familia_lote = cria_lotes(capacidade, peso, produtos_por_familia, tempo_proc, familia_produto, maquinas_familia)
-    L = lowerBound(T, tempo_proc, produtos_por_familia, peso, maquinas_familia)
+    # L = lowerBound(T, tempo_proc, produtos_por_familia, peso, maquinas_familia, capacidade)
+    # L = max(T)
+    L = 250
 
     pasta_instancia = (pasta_resultados / f"Resumo_Instancia_{inst}")
     pasta_instancia.mkdir(parents=True, exist_ok=True)
     logger = configura_logger(pasta_instancia)
-    logger.info("=" * 60)
-    logger.info("MÉTODO DE BENDERS")
-    logger.info("=" * 60)
-    logger.info(f"Instância: {inst}")
-    logger.info(f"Número de produtos: {len(produtos)}")
-    logger.info(f"Número de máquinas: {len(maquinas)}")
-    logger.info(f"Número de lotes válidos: {len(lotes_validos)}")
-    logger.info(f"Número de famílias: {len(familia)}")
+    # logger.info("=" * 60)
+    # logger.info("MÉTODO DE BENDERS")
+    # logger.info("=" * 60)
+    # logger.info(f"Instância: {inst}")
+    # logger.info(f"Número de produtos: {len(produtos)}")
+    # logger.info(f"Número de máquinas: {len(maquinas)}")
+    # logger.info(f"Número de lotes válidos: {len(lotes_validos)}")
+    # logger.info(f"Número de famílias: {len(familia)}")
     #=============================================================================
 
     inicio = time.time()
@@ -283,7 +317,7 @@ def main(nome_arquivo):
 
     arquivo_master = ( pasta_instancia / f"master_{inst}produtos_iteracao_0.lp" ) 
     master.writeProblem( str(arquivo_master) ) 
-    logger.info( f"Master inicial salvo em: {arquivo_master.name}" )
+    # logger.info( f"Master inicial salvo em: {arquivo_master.name}" )
 
     Z, valor_theta, valor_x = resolve_master(master, X, theta)
     iteracao = 0
@@ -298,20 +332,20 @@ def main(nome_arquivo):
         sub, y, Cmax = cria_sub(maquinas, U, maquinas_familia, capacidade, T, P, familia_lote)
         Q = resolve_sub(sub)
 
-        arquivo_sub = ( pasta_instancia / f"sub_{inst}produtos_iteracao_{iteracao}.lp" ) 
-        sub.writeProblem( str(arquivo_sub) )
-        logger.info("") 
-        logger.info("-" * 60)
-        logger.info(f"ITERACAO {iteracao}") 
+        # arquivo_sub = ( pasta_instancia / f"sub_{inst}produtos_iteracao_{iteracao}.lp" ) 
+        # sub.writeProblem( str(arquivo_sub) )
+        # logger.info("") 
+        # logger.info("-" * 60)
+        # logger.info(f"ITERACAO {iteracao}") 
         logger.info(f"Z = {Z}") 
         logger.info(f"theta = {valor_theta}") 
         logger.info(f"Q = {Q}") 
-        logger.info(f"U = {U}")
-        logger.info(f"Número de lotes utilizados = {len(U)}")
-        logger.info(f"Subproblema salvo em: {arquivo_sub.name}")
+        # logger.info(f"U = {U}")
+        # logger.info(f"Número de lotes utilizados = {len(U)}")
+        # logger.info(f"Subproblema salvo em: {arquivo_sub.name}")
 
         if Z >= Q - 1e-6 + len(U):
-            logger.info( "Resultado alcançado." )
+            # logger.info( "Resultado alcançado." )
             break
 
         master.freeTransform()
@@ -320,45 +354,46 @@ def main(nome_arquivo):
 
         numero_cortes += 1
 
-        logger.info(f"Corte {numero_cortes} adicionado.")
-        arquivo_master = ( pasta_instancia / f"master_{inst}produtos_iteracao_{iteracao}.lp" ) 
-        master.writeProblem( str(arquivo_master) ) 
-        logger.info( f"Master salvo em: {arquivo_master.name}" )
+        # logger.info(f"Corte {numero_cortes} adicionado.")
+        # arquivo_master = ( pasta_instancia / f"master_{inst}produtos_iteracao_{iteracao}.lp" ) 
+        # master.writeProblem( str(arquivo_master) ) 
+        # logger.info( f"Master salvo em: {arquivo_master.name}" )
 
         Z, valor_theta, valor_x = resolve_master(master, X, theta)
 
     fim = time.time()
     tempo_total = fim - inicio
     lotes_finais = [n for n, v in enumerate(valor_x) if v == 1]
-    logger.info("") 
-    logger.info("=" * 60) 
-    logger.info("RESULTADO FINAL") 
-    logger.info("=" * 60) 
-    logger.info(f"Solução ótima: " f"theta = {valor_theta:.2f}, " f"Q = {Q:.2f}") 
-    logger.info(f"Lotes selecionados: {lotes_finais}") 
-    logger.info(f"Número de lotes = {len(lotes_finais)}")
-    logger.info(f"Número de iterações = {iteracao}")
-    logger.info(f"Número de cortes = {numero_cortes}")
+    print(Q)
+    # logger.info("") 
+    # logger.info("=" * 60) 
+    # logger.info("RESULTADO FINAL") 
+    # logger.info("=" * 60) 
+    # logger.info(f"Solução ótima: " f"theta = {valor_theta:.2f}, " f"Q = {Q:.2f}") 
+    # logger.info(f"Lotes selecionados: {lotes_finais}") 
+    # logger.info(f"Número de lotes = {len(lotes_finais)}")
+    # logger.info(f"Número de iterações = {iteracao}")
+    # logger.info(f"Número de cortes = {numero_cortes}")
     logger.info(f"Tempo total = {tempo_total:.4f} segundos")
-    arquivo_csv = (pasta_resultados / "resultados.csv")
-    dados_resultado = {
-        "instancia": inst,
-        "produtos": len(produtos),
-        "maquinas": len(maquinas),
-        "familias": len(familia),
-        "lotes_validos": len(lotes_validos),
-        "iteracoes": iteracao,
-        "cortes": numero_cortes,
-        "theta": round(valor_theta, 6),
-        "Q": round(Q, 6),
-        "tempo_segundos": round(tempo_total, 6),
-        "numero_lotes": len(lotes_finais),
-        "lotes_selecionados": str(lotes_finais)}
+    # arquivo_csv = (pasta_resultados / "resultados.csv")
+    # dados_resultado = {
+    #     "instancia": inst,
+    #     "produtos": len(produtos),
+    #     "maquinas": len(maquinas),
+    #     "familias": len(familia),
+    #     "lotes_validos": len(lotes_validos),
+    #     "iteracoes": iteracao,
+    #     "cortes": numero_cortes,
+    #     "theta": round(valor_theta, 6),
+    #     "Q": round(Q, 6),
+    #     "tempo_segundos": round(tempo_total, 6),
+    #     "numero_lotes": len(lotes_finais),
+    #     "lotes_selecionados": str(lotes_finais)}
 
-    salva_resultados_csv(arquivo_csv, dados_resultado)
-    logger.info(f"Resultados salvos em: " f"{arquivo_csv.name}")
-    logger.info("")
-    logger.info("Execução finalizada.")
+    # salva_resultados_csv(arquivo_csv, dados_resultado)
+    # logger.info(f"Resultados salvos em: " f"{arquivo_csv.name}")
+    # logger.info("")
+    # logger.info("Execução finalizada.")
 
 if __name__ == "__main__":
     main(arquivo)

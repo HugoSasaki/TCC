@@ -1,0 +1,4 @@
+instancia,produtos,maquinas,familias,lotes_validos,iteracoes,cortes,theta,Q,tempo_segundos,numero_lotes,lotes_selecionados
+5,5,4,1,31,1,0,45.0,45.0,0.680607,1,[30]
+15,15,4,3,165,3,2,60.0,60.0,2.857385,4,"[30, 157, 159, 162]"
+30,30,5,7,128,111,110,165.0,165.0,25.597991,11,"[6, 11, 16, 43, 58, 76, 80, 89, 94, 112, 127]"
