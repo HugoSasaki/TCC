@@ -183,13 +183,13 @@ def cria_master(lotes_validos, produtos, A, L):
     for n in range(len(X)):
         X[n] = modelo.addVar(f"X{n}", vtype="B")
 
-    theta = modelo.addVar("theta", vtype="C", lb = L)
+    theta = modelo.addVar("theta", vtype="C", ub = L, lb = L - 100)
 
     for i in range(len(produtos)):
         modelo.addCons(quicksum(X[n] * A[n][i] for n in range(len(lotes_validos))) == 1)
 
-    modelo.setObjective(quicksum(X[n] for n in range(len(lotes_validos))) + theta, "minimize")
-    # modelo.setObjective(theta, "minimize")
+    # modelo.setObjective(quicksum(X[n] for n in range(len(lotes_validos))) + theta, "minimize")
+    modelo.setObjective(theta, "minimize")
 
     return(modelo, X, theta)
 
@@ -301,14 +301,14 @@ def main(nome_arquivo):
     pasta_instancia = (pasta_resultados / f"Resumo_Instancia_{inst}")
     pasta_instancia.mkdir(parents=True, exist_ok=True)
     logger = configura_logger(pasta_instancia)
-    # logger.info("=" * 60)
-    # logger.info("MÉTODO DE BENDERS")
-    # logger.info("=" * 60)
-    # logger.info(f"Instância: {inst}")
-    # logger.info(f"Número de produtos: {len(produtos)}")
-    # logger.info(f"Número de máquinas: {len(maquinas)}")
-    # logger.info(f"Número de lotes válidos: {len(lotes_validos)}")
-    # logger.info(f"Número de famílias: {len(familia)}")
+    logger.info("=" * 60)
+    logger.info("MÉTODO DE BENDERS")
+    logger.info("=" * 60)
+    logger.info(f"Instância: {inst}")
+    logger.info(f"Número de produtos: {len(produtos)}")
+    logger.info(f"Número de máquinas: {len(maquinas)}")
+    logger.info(f"Número de lotes válidos: {len(lotes_validos)}")
+    logger.info(f"Número de famílias: {len(familia)}")
     #=============================================================================
 
     inicio = time.time()
@@ -344,7 +344,8 @@ def main(nome_arquivo):
         # logger.info(f"Número de lotes utilizados = {len(U)}")
         # logger.info(f"Subproblema salvo em: {arquivo_sub.name}")
 
-        if Z >= Q - 1e-6 + len(U):
+        # if Z >= Q - 1e-6 + len(U):
+        if Z >= Q - 1e-6:
             # logger.info( "Resultado alcançado." )
             break
 
