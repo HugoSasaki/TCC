@@ -6,7 +6,7 @@ import time
 import csv
 import math
 
-arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 30 jobs.txt"
+arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 15 jobs.txt"
 pasta_resultados = Path(__file__).parent.parent / "Resultados" / "Benders"
 pasta_resultados.mkdir(parents=True, exist_ok=True)
 

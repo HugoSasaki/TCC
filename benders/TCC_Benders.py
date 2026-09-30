@@ -1,4 +1,4 @@
-from pyscipopt import Model, quicksum, Conshdlr
+from pyscipopt import Model, quicksum, Conshdlr, SCIP_RESULT
 from itertools import combinations
 from pathlib import Path
 import logging
@@ -6,7 +6,6 @@ import time
 import csv
 import math
 
-arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 50 jobs.txt"
 pasta_resultados = Path(__file__).parent.parent / "Resultados" / "Benders"
 pasta_resultados.mkdir(parents=True, exist_ok=True)
 
@@ -15,28 +14,15 @@ def configura_logger(pasta_instancia):
     arquivo_log = pasta_instancia / "_resultado.log"
     logger = logging.getLogger(f"Benders_{pasta_instancia.name}")
     logger.setLevel(logging.INFO)
-    # Evita duplicação de mensagens
     if logger.handlers:
         logger.handlers.clear()
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 
-    # --------------------------------------------------------
-    # Arquivo
-    # --------------------------------------------------------
-
     file_handler = logging.FileHandler(arquivo_log, mode="w", encoding="utf-8")
     file_handler.setFormatter(formatter)
 
-    # --------------------------------------------------------
-    # Terminal
-    # --------------------------------------------------------
-
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(formatter)
-
-    # --------------------------------------------------------
-    # Adiciona os handlers
-    # --------------------------------------------------------
 
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
@@ -65,7 +51,6 @@ def ler_instancia(nome_arquivo):
         if "NÚMERO DE PRODUTOS" in linha:
             texto, inst = linha.split(":")
 
-        # identificar seção
         if "NOME DO PRODUTO" in linha:
             secao = "produtos"
             continue
@@ -81,9 +66,6 @@ def ler_instancia(nome_arquivo):
         elif "---" in linha:
             continue
 
-        # -------------------
-        # PRODUTOS
-        # -------------------
         if secao == "produtos":
             nome, p, f = linha.split("/")
 
@@ -92,17 +74,11 @@ def ler_instancia(nome_arquivo):
 
             produto_id += 1
 
-        # -------------------
-        # MÁQUINAS
-        # -------------------
         elif secao == "maquinas":
             maq, cap = linha.split("/")
 
             capacidade[maq] = float(cap)
 
-        # -------------------
-        # FAMÍLIAS
-        # -------------------
         elif secao == "familias":
             fam, tempo, maq = linha.split("/")
 
@@ -188,6 +164,8 @@ def cria_master(lotes_validos, produtos, A, L):
     for i in range(len(produtos)):
         modelo.addCons(quicksum(X[n] * A[n][i] for n in range(len(lotes_validos))) == 1)
 
+    modelo.addCons(theta >= L)
+
     # modelo.setObjective(quicksum(X[n] for n in range(len(lotes_validos))) + theta, "minimize")
     modelo.setObjective(theta, "minimize")
 
@@ -203,7 +181,7 @@ def cria_sub(maquinas, lotes_utilizados, maquinas_familia, capacidade, T, P, fam
         for j in range(len(maquinas)):
             y[(u,j)] = modelo.addVar(f"Y{u},{j}", vtype="B")
 
-    Cmax = modelo.addVar("Cmax", vtype="C", lb=min(T))
+    Cmax = modelo.addVar("Cmax", vtype="C", lb=max(T[u] for u in lotes_utilizados))
 
     for u in lotes_utilizados:
         modelo.addCons(quicksum(y[(u,j)] for j in range(len(maquinas))) == 1)
@@ -237,6 +215,99 @@ def resolve_sub(modelo):
 
     return(modelo.getObjVal())
 
+class BendersLazyCuts(Conshdlr):
+
+    def __init__(self, master, X, theta, lotes_validos, maquinas, maquinas_familia, capacidade, T, P, familia_lote, L, logger):
+        
+        self.master = master
+        self.X = X
+        self.theta = theta
+        self.lotes_validos = lotes_validos
+        self.maquinas = maquinas
+        self.maquinas_familia = maquinas_familia
+        self.capacidade = capacidade
+        self.T = T
+        self.P = P
+        self.familia_lote = familia_lote
+        self.L = L
+        self.logger = logger
+        self.numero_cortes = 0
+        self.cache_Q = {}
+        self.cache_LB = 0
+        self.cache_UB = 0
+        self.cache_GAP = 0
+
+    def _avalia(self, sol):
+      
+        x_vals = [round(self.master.getSolVal(sol, self.X[n])) for n in range(len(self.X))]
+        U = tuple(n for n, v in enumerate(x_vals) if v > 0.5)
+
+        if not U:
+            return False, U, None, None
+
+        if U not in self.cache_Q:
+            sub, y, Cmax = cria_sub(self.maquinas, U, self.maquinas_familia,
+                                     self.capacidade, self.T, self.P, self.familia_lote)
+            self.cache_Q[U] = resolve_sub(sub)
+
+        Q = self.cache_Q[U]
+        theta_val = self.master.getSolVal(sol, self.theta)
+
+        if self.theta >= self.cache_LB:
+            self.cache_LB = self.theta
+
+        if Q <= self.cache_UB:
+            self.cache_UB = Q
+
+        GAP = (Q - theta_val) / Q
+
+        if GAP <= self.cache_GAP:
+            self.cache_GAP = GAP
+
+        violado = theta_val < Q - 1e-6
+        return violado, U, Q, theta_val, self.cache_UB, self.cache_LB, self.cache_GAP
+
+    def _corte(self, U, Q):
+
+        n_lotes = len(self.X)
+        dentro_de_U = quicksum(self.X[n] for n in U)
+        fora_de_U = quicksum(self.X[n] for n in range(n_lotes) if n not in U)
+
+        return self.theta >= (Q - self.L) * (dentro_de_U - fora_de_U) - (Q - self.L) * (len(U) - 1) + self.L
+
+    def _tenta_cortar(self, sol):
+
+        violado, U, Q, theta_val, UB, LB, GAP = self._avalia(sol)
+
+        if not violado:
+            return {"result": SCIP_RESULT.FEASIBLE}
+
+        self.master.addCons(self._corte(U, Q))
+        self.numero_cortes += 1
+        self.logger.info(
+            f'''[lazy] corte {self.numero_cortes} | lotes usados = {len(U)} | Q = {Q:.2f} | theta = {theta_val:.2f}
+                UB = {UB} | LB = {LB} | Gap = {GAP}%'''
+        )
+
+        return {"result": SCIP_RESULT.CONSADDED}
+
+    def consenfolp(self, constraints, nusefulconss, solinfeasible):
+        x = [self.master.getSolVal(None, v) for v in self.X]
+        if any(1e-6 < v < 1 - 1e-6 for v in x):   # defesa: fracionária não é comigo
+            return {"result": SCIP_RESULT.FEASIBLE}
+        return self._tenta_cortar(None)
+
+    def conscheck(self, constraints, solution, checkintegrality, checklprows, printreason, completely):
+
+        violado, *_ = self._avalia(solution)
+        return {"result": SCIP_RESULT.INFEASIBLE if violado else SCIP_RESULT.FEASIBLE}
+
+    def conslock(self, constraint, locktype, nlockspos, nlocksneg):
+
+        for x in self.X:
+            self.master.addVarLocks(x, nlockspos + nlocksneg, nlockspos + nlocksneg)
+        self.master.addVarLocks(self.theta, nlockspos + nlocksneg, nlockspos + nlocksneg)
+
 def salva_resultados_csv(arquivo_csv, dados):
 
     arquivo_existe = arquivo_csv.exists()
@@ -248,55 +319,31 @@ def salva_resultados_csv(arquivo_csv, dados):
 
         writer.writerow(dados)
 
-# def lowerBound(tempo_proc, produtos_por_familia, peso, maquinas_familia, capacidade):
+def lowerBound(tempo_proc, produtos_por_familia, peso, maquinas_familia, capacidade):
 
-#     limites_familia = []
+    limites_familia = []
 
-#     for fam, produtos_fam in produtos_por_familia.items():
+    for fam, produtos_fam in produtos_por_familia.items():
 
-#         tempo = tempo_proc[fam]
-#         peso_total = sum(peso[p] for p in produtos_fam)
-#         maquinas_disponiveis = maquinas_familia[fam]
-#         maior_capacidade = max(capacidade[m] for m in maquinas_disponiveis)
-#         numero_lotes = math.ceil(peso_total / maior_capacidade)
-#         numero_maquinas = len(maquinas_disponiveis)
-#         numero_camadas = math.ceil(numero_lotes / numero_maquinas)
-#         limite_familia = tempo * numero_camadas
-#         limites_familia.append(limite_familia)
+        tempo = tempo_proc[fam]
+        peso_total = sum(peso[p] for p in produtos_fam)
+        maquinas_disponiveis = maquinas_familia[fam]
+        maior_capacidade = max(capacidade[m] for m in maquinas_disponiveis)
+        numero_lotes = math.ceil(peso_total / maior_capacidade)
+        numero_maquinas = len(maquinas_disponiveis)
+        numero_camadas = math.ceil(numero_lotes / numero_maquinas)
+        limite_familia = tempo * numero_camadas
+        limites_familia.append(limite_familia)
 
-#     L = max(limites_familia)
+    L = max(limites_familia)
     
-#     return L
-
-def lowerBound(T, tempo_proc, produtos_por_familia, peso, maquinas_familia, capacidade):
-
-    maior_tempo = max(T)
-
-    for k, v in tempo_proc.items():
-        if v == maior_tempo:
-            familia_maior_tempo = k 
-
-    peso_total = 0
-    for k, v in peso.items():
-        if k in produtos_por_familia[familia_maior_tempo]:
-            peso_total += v
-    
-    for k, v in maquinas_familia.items():
-        if k == familia_maior_tempo:
-            maior_capacidade = max(capacidade[valor] for valor in v)
-    
-    div = math.ceil(peso_total/maior_capacidade)
-    L = maior_tempo * div
-
     return L
 
 def main(nome_arquivo):
 
     inst, peso, familia_produto, capacidade, tempo_proc, maquinas_familia, familia, produtos_por_familia = ler_instancia(nome_arquivo)
     T, P, lotes_validos, A, maquinas, produtos, familia_lote = cria_lotes(capacidade, peso, produtos_por_familia, tempo_proc, familia_produto, maquinas_familia)
-    # L = lowerBound(T, tempo_proc, produtos_por_familia, peso, maquinas_familia, capacidade)
-    # L = max(T)
-    L = 250
+    L = lowerBound(tempo_proc, produtos_por_familia, peso, maquinas_familia, capacidade)
 
     pasta_instancia = (pasta_resultados / f"Resumo_Instancia_{inst}")
     pasta_instancia.mkdir(parents=True, exist_ok=True)
@@ -317,55 +364,24 @@ def main(nome_arquivo):
 
     arquivo_master = ( pasta_instancia / f"master_{inst}produtos_iteracao_0.lp" ) 
     master.writeProblem( str(arquivo_master) ) 
-    # logger.info( f"Master inicial salvo em: {arquivo_master.name}" )
+    logger.info( f"Master inicial salvo em: {arquivo_master.name}" )
 
+
+    cortes_lazy = BendersLazyCuts(
+        master, X, theta, lotes_validos, maquinas, maquinas_familia,
+        capacidade, T, P, familia_lote, L, logger
+    )
+    master.includeConshdlr(
+        cortes_lazy, "BendersLazyCuts", "cortes de Benders gerados sob demanda (lazy constraints)",
+        sepapriority=0, enfopriority=-10, chckpriority=-10,
+        sepafreq=-1, propfreq=-1, eagerfreq=-1, maxprerounds=0,
+        delaysepa=False, delayprop=False, needscons=False,
+    )
     Z, valor_theta, valor_x = resolve_master(master, X, theta)
-    iteracao = 0
-    numero_cortes = 0
-    Q = None
-    
-    while True:
-
-        iteracao +=1
-        U = [n for n, val in enumerate(valor_x) if val == 1]
-
-        sub, y, Cmax = cria_sub(maquinas, U, maquinas_familia, capacidade, T, P, familia_lote)
-        Q = resolve_sub(sub)
-
-        # arquivo_sub = ( pasta_instancia / f"sub_{inst}produtos_iteracao_{iteracao}.lp" ) 
-        # sub.writeProblem( str(arquivo_sub) )
-        # logger.info("") 
-        # logger.info("-" * 60)
-        # logger.info(f"ITERACAO {iteracao}") 
-        logger.info(f"Z = {Z}") 
-        logger.info(f"theta = {valor_theta}") 
-        logger.info(f"Q = {Q}") 
-        # logger.info(f"U = {U}")
-        # logger.info(f"Número de lotes utilizados = {len(U)}")
-        # logger.info(f"Subproblema salvo em: {arquivo_sub.name}")
-
-        # if Z >= Q - 1e-6 + len(U):
-        if Z >= Q - 1e-6:
-            # logger.info( "Resultado alcançado." )
-            break
-
-        master.freeTransform()
-
-        master.addCons(theta >= (Q - L) * (quicksum(X[n] for n in U) - quicksum(X[n] for n in range(len(lotes_validos)) if n not in U)) - (Q - L) * (len(U) - 1) + L)
-
-        numero_cortes += 1
-
-        # logger.info(f"Corte {numero_cortes} adicionado.")
-        # arquivo_master = ( pasta_instancia / f"master_{inst}produtos_iteracao_{iteracao}.lp" ) 
-        # master.writeProblem( str(arquivo_master) ) 
-        # logger.info( f"Master salvo em: {arquivo_master.name}" )
-
-        Z, valor_theta, valor_x = resolve_master(master, X, theta)
 
     fim = time.time()
     tempo_total = fim - inicio
-    lotes_finais = [n for n, v in enumerate(valor_x) if v == 1]
-    print(Q)
+    lotes_finais = [n for n, v in enumerate(valor_x) if v > 0.5]
     # logger.info("") 
     # logger.info("=" * 60) 
     # logger.info("RESULTADO FINAL") 
@@ -397,4 +413,11 @@ def main(nome_arquivo):
     # logger.info("Execução finalizada.")
 
 if __name__ == "__main__":
+
+    arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 5 jobs.txt"
     main(arquivo)
+
+    # caminho = Path(__file__).parent.parent / "Instancias"
+    # arquivos = sorted(caminho.glob("*.txt"), key=lambda arquivo: arquivo.stat().st_size)
+    # for arquivo in arquivos:
+    #     main(arquivo)

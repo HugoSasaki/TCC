@@ -1,7 +1,7 @@
 \ SCIP STATISTICS
 \   Problem name     : Master
 \   Variables        : 745 (744 binary, 0 integer, 0 implicit integer, 1 continuous)
-\   Constraints      : 50
+\   Constraints      : 51
 Minimize
  Obj: +1 theta
 Subject to
@@ -225,6 +225,7 @@ Subject to
   +1 X685 +1 X688 +1 X690 +1 X691 +1 X693 +1 X694 +1 X695 +1 X698 +1 X700 +1 X701 +1 X703 +1 X704 +1 X705
   +1 X707 +1 X708 +1 X709 +1 X710 +1 X713 +1 X715 +1 X716 +1 X718 +1 X719 +1 X720 +1 X722 +1 X723 +1 X724
   +1 X725 +1 X727 +1 X728 +1 X729 +1 X730 +1 X731 +1 X732 +1 X733 = +1
+ c51: +1 theta >= +178
 Bounds
  0 <= X0 <= 1
  0 <= X1 <= 1
@@ -970,7 +971,7 @@ Bounds
  0 <= X741 <= 1
  0 <= X742 <= 1
  0 <= X743 <= 1
- 250 <= theta
+ 178 <= theta
 Binaries
  X0 X1 X2 X3 X4 X5 X6 X7 X8 X9 X10 X11 X12 X13 X14 X15 X16 X17 X18 X19 X20 X21 X22 X23 X24 X25 X26 X27
  X28 X29 X30 X31 X32 X33 X34 X35 X36 X37 X38 X39 X40 X41 X42 X43 X44 X45 X46 X47 X48 X49 X50 X51 X52 X53

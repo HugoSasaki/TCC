@@ -1,11 +1,9 @@
 \ SCIP STATISTICS
 \   Problem name     : Master
 \   Variables        : 32 (31 binary, 0 integer, 0 implicit integer, 1 continuous)
-\   Constraints      : 5
+\   Constraints      : 6
 Minimize
- Obj: +1 X0 +1 X1 +1 X2 +1 X3 +1 X4 +1 X5 +1 X6 +1 X7 +1 X8 +1 X9 +1 X10 +1 X11 +1 X12 +1 X13 +1 X14 +1 X15
-      +1 X16 +1 X17 +1 X18 +1 X19 +1 X20 +1 X21 +1 X22 +1 X23 +1 X24 +1 X25 +1 X26 +1 X27 +1 X28 +1 X29
-      +1 X30 +1 theta
+ Obj: +1 theta
 Subject to
  c1: +1 X0 +1 X5 +1 X6 +1 X7 +1 X8 +1 X15 +1 X16 +1 X17 +1 X18 +1 X19 +1 X20 +1 X25 +1 X26 +1 X27 +1 X28
   +1 X30 = +1
@@ -17,6 +15,7 @@ Subject to
   +1 X30 = +1
  c5: +1 X4 +1 X8 +1 X11 +1 X13 +1 X14 +1 X17 +1 X19 +1 X20 +1 X22 +1 X23 +1 X24 +1 X26 +1 X27 +1 X28 +1 X29
   +1 X30 = +1
+ c6: +1 theta >= +45
 Bounds
  0 <= X0 <= 1
  0 <= X1 <= 1
