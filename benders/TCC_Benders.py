@@ -382,35 +382,35 @@ def main(nome_arquivo):
     fim = time.time()
     tempo_total = fim - inicio
     lotes_finais = [n for n, v in enumerate(valor_x) if v > 0.5]
-    # logger.info("") 
-    # logger.info("=" * 60) 
-    # logger.info("RESULTADO FINAL") 
-    # logger.info("=" * 60) 
-    # logger.info(f"Solução ótima: " f"theta = {valor_theta:.2f}, " f"Q = {Q:.2f}") 
-    # logger.info(f"Lotes selecionados: {lotes_finais}") 
-    # logger.info(f"Número de lotes = {len(lotes_finais)}")
+    logger.info("") 
+    logger.info("=" * 60) 
+    logger.info("RESULTADO FINAL") 
+    logger.info("=" * 60) 
+    logger.info(f"Solução ótima: " f"theta = {valor_theta:.2f}, " f"Q = {Q:.2f}") 
+    logger.info(f"Lotes selecionados: {lotes_finais}") 
+    logger.info(f"Número de lotes = {len(lotes_finais)}")
     # logger.info(f"Número de iterações = {iteracao}")
     # logger.info(f"Número de cortes = {numero_cortes}")
     logger.info(f"Tempo total = {tempo_total:.4f} segundos")
-    # arquivo_csv = (pasta_resultados / "resultados.csv")
-    # dados_resultado = {
-    #     "instancia": inst,
-    #     "produtos": len(produtos),
-    #     "maquinas": len(maquinas),
-    #     "familias": len(familia),
-    #     "lotes_validos": len(lotes_validos),
-    #     "iteracoes": iteracao,
-    #     "cortes": numero_cortes,
-    #     "theta": round(valor_theta, 6),
-    #     "Q": round(Q, 6),
-    #     "tempo_segundos": round(tempo_total, 6),
-    #     "numero_lotes": len(lotes_finais),
-    #     "lotes_selecionados": str(lotes_finais)}
+    arquivo_csv = (pasta_resultados / "resultados.csv")
+    dados_resultado = {
+        "instancia": inst,
+        "produtos": len(produtos),
+        "maquinas": len(maquinas),
+        "familias": len(familia),
+        "lotes_validos": len(lotes_validos),
+        # "iteracoes": iteracao,
+        # "cortes": numero_cortes,
+        "theta": round(valor_theta, 6),
+        "Q": round(Q, 6),
+        "tempo_segundos": round(tempo_total, 6),
+        "numero_lotes": len(lotes_finais),
+        "lotes_selecionados": str(lotes_finais)}
 
-    # salva_resultados_csv(arquivo_csv, dados_resultado)
-    # logger.info(f"Resultados salvos em: " f"{arquivo_csv.name}")
-    # logger.info("")
-    # logger.info("Execução finalizada.")
+    salva_resultados_csv(arquivo_csv, dados_resultado)
+    logger.info(f"Resultados salvos em: " f"{arquivo_csv.name}")
+    logger.info("")
+    logger.info("Execução finalizada.")
 
 if __name__ == "__main__":
 
