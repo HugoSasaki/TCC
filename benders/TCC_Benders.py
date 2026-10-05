@@ -233,9 +233,8 @@ class BendersLazyCuts(Conshdlr):
         self.logger = logger
         self.numero_cortes = 0
         self.cache_Q = {}
-        self.cache_LB = 0
-        self.cache_UB = 0
-        self.cache_GAP = 0
+        self.cache_LB = L
+        self.cache_UB = float("inf")
 
     def _avalia(self, sol):
       
@@ -253,19 +252,16 @@ class BendersLazyCuts(Conshdlr):
         Q = self.cache_Q[U]
         theta_val = self.master.getSolVal(sol, self.theta)
 
-        if self.theta >= self.cache_LB:
-            self.cache_LB = self.theta
-
         if Q <= self.cache_UB:
             self.cache_UB = Q
 
-        GAP = (Q - theta_val) / Q
+        lb_hist = self.master.getLowerbound()
+        if lb_hist >= self.cache_LB:
+            self.cache_LB = lb_hist
 
-        if GAP <= self.cache_GAP:
-            self.cache_GAP = GAP
-
+        self.cache_GAP = ((self.cache_UB - self.cache_LB) / self.cache_UB) * 100
         violado = theta_val < Q - 1e-6
-        return violado, U, Q, theta_val, self.cache_UB, self.cache_LB, self.cache_GAP
+        return violado, U, Q, theta_val
 
     def _corte(self, U, Q):
 
@@ -277,7 +273,7 @@ class BendersLazyCuts(Conshdlr):
 
     def _tenta_cortar(self, sol):
 
-        violado, U, Q, theta_val, UB, LB, GAP = self._avalia(sol)
+        violado, U, Q, theta_val = self._avalia(sol)
 
         if not violado:
             return {"result": SCIP_RESULT.FEASIBLE}
@@ -285,8 +281,14 @@ class BendersLazyCuts(Conshdlr):
         self.master.addCons(self._corte(U, Q))
         self.numero_cortes += 1
         self.logger.info(
-            f'''[lazy] corte {self.numero_cortes} | lotes usados = {len(U)} | Q = {Q:.2f} | theta = {theta_val:.2f}
-                UB = {UB} | LB = {LB} | Gap = {GAP}%'''
+            f'''[lazy] corte {self.numero_cortes}
+                lotes usados = {len(U)}
+                Q = {Q:.2f}
+                theta = {theta_val:.2f}
+                UB = {self.cache_UB}
+                LB = {self.cache_LB}
+                Gap = {self.cache_GAP:.2f}%
+                '''
         )
 
         return {"result": SCIP_RESULT.CONSADDED}
@@ -295,6 +297,10 @@ class BendersLazyCuts(Conshdlr):
         x = [self.master.getSolVal(None, v) for v in self.X]
         if any(1e-6 < v < 1 - 1e-6 for v in x):   # defesa: fracionária não é comigo
             return {"result": SCIP_RESULT.FEASIBLE}
+        return self._tenta_cortar(None)
+
+    def consenfops(self, constraints, nusefulconss, solinfeasible, objinfeasible):
+
         return self._tenta_cortar(None)
 
     def conscheck(self, constraints, solution, checkintegrality, checklprows, printreason, completely):
@@ -335,9 +341,7 @@ def lowerBound(tempo_proc, produtos_por_familia, peso, maquinas_familia, capacid
         limite_familia = tempo * numero_camadas
         limites_familia.append(limite_familia)
 
-    L = max(limites_familia)
-    
-    return L
+    return max(limites_familia)
 
 def main(nome_arquivo):
 
@@ -386,7 +390,7 @@ def main(nome_arquivo):
     logger.info("=" * 60) 
     logger.info("RESULTADO FINAL") 
     logger.info("=" * 60) 
-    logger.info(f"Solução ótima: " f"theta = {valor_theta:.2f}, " f"Q = {Q:.2f}") 
+    # logger.info(f"Solução ótima: " f"theta = {valor_theta:.2f}, " f"Q = {cortes_lazy.cache_Q[lotes_finais]:.2f}") 
     logger.info(f"Lotes selecionados: {lotes_finais}") 
     logger.info(f"Número de lotes = {len(lotes_finais)}")
     # logger.info(f"Número de iterações = {iteracao}")
@@ -402,7 +406,7 @@ def main(nome_arquivo):
         # "iteracoes": iteracao,
         # "cortes": numero_cortes,
         "theta": round(valor_theta, 6),
-        "Q": round(Q, 6),
+        # "Q": round(Q, 6),
         "tempo_segundos": round(tempo_total, 6),
         "numero_lotes": len(lotes_finais),
         "lotes_selecionados": str(lotes_finais)}
@@ -414,7 +418,7 @@ def main(nome_arquivo):
 
 if __name__ == "__main__":
 
-    arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 5 jobs.txt"
+    arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 30 jobs.txt"
     main(arquivo)
 
     # caminho = Path(__file__).parent.parent / "Instancias"
