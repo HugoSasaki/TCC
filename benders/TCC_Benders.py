@@ -367,10 +367,7 @@ def main(nome_arquivo, param_ub=None):
     
     master, X, theta = cria_master(lotes_validos, produtos, A, L, param_ub)
 
-    arquivo_master = ( pasta_instancia / f"master_{inst}produtos_iteracao_0.lp" ) 
-    master.writeProblem( str(arquivo_master) ) 
-    logger.info( f"Master inicial salvo em: {arquivo_master.name}" )
-
+    #Adicionar o loop aqui, e pegar os valores pra colocar no cortes_lazy
 
     cortes_lazy = BendersLazyCuts(
         master, X, theta, lotes_validos, maquinas, maquinas_familia,
@@ -427,6 +424,7 @@ if __name__ == "__main__":
 
     resultado_alns = None
     arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 15 jobs.txt"
+
     main(arquivo, resultado_alns)
 
     # caminho = Path(__file__).parent.parent / "Instancias"
