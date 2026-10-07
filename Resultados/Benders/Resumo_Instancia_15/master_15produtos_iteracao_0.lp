@@ -1,7 +1,7 @@
 \ SCIP STATISTICS
 \   Problem name     : Master
 \   Variables        : 166 (165 binary, 0 integer, 0 implicit integer, 1 continuous)
-\   Constraints      : 15
+\   Constraints      : 16
 Minimize
  Obj: +1 theta
 Subject to
@@ -53,6 +53,7 @@ Subject to
   +1 X109 +1 X111 +1 X112 +1 X113 +1 X116 +1 X118 +1 X119 +1 X121 +1 X122 +1 X123 +1 X125 +1 X126 +1 X127
   +1 X128 +1 X131 +1 X133 +1 X134 +1 X136 +1 X137 +1 X138 +1 X140 +1 X141 +1 X142 +1 X143 +1 X145 +1 X146
   +1 X147 +1 X148 +1 X149 +1 X151 +1 X152 +1 X153 +1 X154 +1 X155 +1 X156 +1 X157 = +1
+ c16: +1 theta >= +60
 Bounds
  0 <= X0 <= 1
  0 <= X1 <= 1

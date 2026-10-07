@@ -150,7 +150,7 @@ def cria_lotes(capacidade, peso, produtos_por_familia, tempo_proc, familia_produ
         familia_lote
     )
 
-def cria_master(lotes_validos, produtos, A, L):
+def cria_master(lotes_validos, produtos, A, L, ub):
 
     modelo = Model("Master")
     modelo.hideOutput()
@@ -159,7 +159,7 @@ def cria_master(lotes_validos, produtos, A, L):
     for n in range(len(X)):
         X[n] = modelo.addVar(f"X{n}", vtype="B")
 
-    theta = modelo.addVar("theta", vtype="C", lb = L)
+    theta = modelo.addVar("theta", vtype="C", lb = L, ub=ub)
 
     for i in range(len(produtos)):
         modelo.addCons(quicksum(X[n] * A[n][i] for n in range(len(lotes_validos))) == 1)
@@ -171,7 +171,7 @@ def cria_master(lotes_validos, produtos, A, L):
 
     return(modelo, X, theta)
 
-def cria_sub(maquinas, lotes_utilizados, maquinas_familia, capacidade, T, P, familia_lote):
+def cria_sub(maquinas, lotes_utilizados, maquinas_familia, capacidade, T, P, familia_lote, ub):
 
     modelo = Model("Sub")
     modelo.hideOutput()
@@ -181,7 +181,7 @@ def cria_sub(maquinas, lotes_utilizados, maquinas_familia, capacidade, T, P, fam
         for j in range(len(maquinas)):
             y[(u,j)] = modelo.addVar(f"Y{u},{j}", vtype="B")
 
-    Cmax = modelo.addVar("Cmax", vtype="C", lb=max(T[u] for u in lotes_utilizados))
+    Cmax = modelo.addVar("Cmax", vtype="C", lb=max(T[u] for u in lotes_utilizados), ub=ub)
 
     for u in lotes_utilizados:
         modelo.addCons(quicksum(y[(u,j)] for j in range(len(maquinas))) == 1)
@@ -217,7 +217,7 @@ def resolve_sub(modelo):
 
 class BendersLazyCuts(Conshdlr):
 
-    def __init__(self, master, X, theta, lotes_validos, maquinas, maquinas_familia, capacidade, T, P, familia_lote, L, logger):
+    def __init__(self, master, X, theta, lotes_validos, maquinas, maquinas_familia, capacidade, T, P, familia_lote, L, logger, ub):
         
         self.master = master
         self.X = X
@@ -235,6 +235,7 @@ class BendersLazyCuts(Conshdlr):
         self.cache_Q = {}
         self.cache_LB = L
         self.cache_UB = float("inf")
+        self.ub = ub
 
     def _avalia(self, sol):
       
@@ -246,7 +247,7 @@ class BendersLazyCuts(Conshdlr):
 
         if U not in self.cache_Q:
             sub, y, Cmax = cria_sub(self.maquinas, U, self.maquinas_familia,
-                                     self.capacidade, self.T, self.P, self.familia_lote)
+                                     self.capacidade, self.T, self.P, self.familia_lote, self.ub)
             self.cache_Q[U] = resolve_sub(sub)
 
         Q = self.cache_Q[U]
@@ -343,7 +344,7 @@ def lowerBound(tempo_proc, produtos_por_familia, peso, maquinas_familia, capacid
 
     return max(limites_familia)
 
-def main(nome_arquivo):
+def main(nome_arquivo, param_ub=None):
 
     inst, peso, familia_produto, capacidade, tempo_proc, maquinas_familia, familia, produtos_por_familia = ler_instancia(nome_arquivo)
     T, P, lotes_validos, A, maquinas, produtos, familia_lote = cria_lotes(capacidade, peso, produtos_por_familia, tempo_proc, familia_produto, maquinas_familia)
@@ -364,7 +365,7 @@ def main(nome_arquivo):
 
     inicio = time.time()
     
-    master, X, theta = cria_master(lotes_validos, produtos, A, L)
+    master, X, theta = cria_master(lotes_validos, produtos, A, L, param_ub)
 
     arquivo_master = ( pasta_instancia / f"master_{inst}produtos_iteracao_0.lp" ) 
     master.writeProblem( str(arquivo_master) ) 
@@ -373,7 +374,7 @@ def main(nome_arquivo):
 
     cortes_lazy = BendersLazyCuts(
         master, X, theta, lotes_validos, maquinas, maquinas_familia,
-        capacidade, T, P, familia_lote, L, logger
+        capacidade, T, P, familia_lote, L, logger, param_ub
     )
     master.includeConshdlr(
         cortes_lazy, "BendersLazyCuts", "cortes de Benders gerados sob demanda (lazy constraints)",
@@ -382,6 +383,9 @@ def main(nome_arquivo):
         delaysepa=False, delayprop=False, needscons=False,
     )
     Z, valor_theta, valor_x = resolve_master(master, X, theta)
+    U_final = tuple(n for n, v in enumerate(valor_x) if v > 0.5)
+    Q = cortes_lazy.cache_Q[U_final]
+    numero_cortes = cortes_lazy.numero_cortes
 
     fim = time.time()
     tempo_total = fim - inicio
@@ -390,26 +394,29 @@ def main(nome_arquivo):
     logger.info("=" * 60) 
     logger.info("RESULTADO FINAL") 
     logger.info("=" * 60) 
-    # logger.info(f"Solução ótima: " f"theta = {valor_theta:.2f}, " f"Q = {cortes_lazy.cache_Q[lotes_finais]:.2f}") 
+    logger.info(f"Solução ótima: " f"theta = {valor_theta:.2f}, " f"Q = {Q:.2f}") 
     logger.info(f"Lotes selecionados: {lotes_finais}") 
     logger.info(f"Número de lotes = {len(lotes_finais)}")
     # logger.info(f"Número de iterações = {iteracao}")
-    # logger.info(f"Número de cortes = {numero_cortes}")
+    logger.info(f"Número de cortes = {numero_cortes}")
     logger.info(f"Tempo total = {tempo_total:.4f} segundos")
     arquivo_csv = (pasta_resultados / "resultados.csv")
     dados_resultado = {
-        "instancia": inst,
+        "instancia": nome_arquivo,
         "produtos": len(produtos),
         "maquinas": len(maquinas),
         "familias": len(familia),
         "lotes_validos": len(lotes_validos),
         # "iteracoes": iteracao,
-        # "cortes": numero_cortes,
+        "cortes": numero_cortes,
         "theta": round(valor_theta, 6),
-        # "Q": round(Q, 6),
+        "Q": round(Q, 6),
         "tempo_segundos": round(tempo_total, 6),
         "numero_lotes": len(lotes_finais),
-        "lotes_selecionados": str(lotes_finais)}
+        "lotes_selecionados": str(lotes_finais),
+        "Lower Bound": str(cortes_lazy.cache_LB),
+        "Upper Bound": str(cortes_lazy.cache_UB),
+        "Gap": str(cortes_lazy.cache_GAP)}
 
     salva_resultados_csv(arquivo_csv, dados_resultado)
     logger.info(f"Resultados salvos em: " f"{arquivo_csv.name}")
@@ -418,8 +425,9 @@ def main(nome_arquivo):
 
 if __name__ == "__main__":
 
-    arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 30 jobs.txt"
-    main(arquivo)
+    resultado_alns = None
+    arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 15 jobs.txt"
+    main(arquivo, resultado_alns)
 
     # caminho = Path(__file__).parent.parent / "Instancias"
     # arquivos = sorted(caminho.glob("*.txt"), key=lambda arquivo: arquivo.stat().st_size)
