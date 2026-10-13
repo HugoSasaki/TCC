@@ -159,7 +159,7 @@ def cria_master(lotes_validos, produtos, A, L, ub):
     for n in range(len(X)):
         X[n] = modelo.addVar(f"X{n}", vtype="B")
 
-    theta = modelo.addVar("theta", vtype="C", lb = L, ub=ub)
+    theta = modelo.addVar("theta", vtype="C", lb=L, ub=ub)
 
     for i in range(len(produtos)):
         modelo.addCons(quicksum(X[n] * A[n][i] for n in range(len(lotes_validos))) == 1)
@@ -217,7 +217,7 @@ def resolve_sub(modelo):
 
 class BendersLazyCuts(Conshdlr):
 
-    def __init__(self, master, X, theta, lotes_validos, maquinas, maquinas_familia, capacidade, T, P, familia_lote, L, logger, ub):
+    def __init__(self, master, X, theta, lotes_validos, maquinas, maquinas_familia, capacidade, T, P, familia_lote, L, logger, ub, cache_Q):
         
         self.master = master
         self.X = X
@@ -232,7 +232,7 @@ class BendersLazyCuts(Conshdlr):
         self.L = L
         self.logger = logger
         self.numero_cortes = 0
-        self.cache_Q = {}
+        self.cache_Q = cache_Q
         self.cache_LB = L
         self.cache_UB = float("inf")
         self.ub = ub
@@ -361,17 +361,66 @@ def main(nome_arquivo, param_ub=None):
     logger.info(f"Número de máquinas: {len(maquinas)}")
     logger.info(f"Número de lotes válidos: {len(lotes_validos)}")
     logger.info(f"Número de famílias: {len(familia)}")
+    logger.info("=" * 60)
     #=============================================================================
 
     inicio = time.time()
     
     master, X, theta = cria_master(lotes_validos, produtos, A, L, param_ub)
+    melhor_Z = 0
+    melhor_Q = float("inf")
+    cache_Q = {}
+    inicio_master_loop = time.time()
 
-    #Adicionar o loop aqui, e pegar os valores pra colocar no cortes_lazy
+    while True:
 
+        Z, valor_theta, valor_x = resolve_master(master, X, theta)
+        U = tuple(n for n, v in enumerate(valor_x) if v == 1)
+
+        if param_ub == None:
+            ub = melhor_Q
+        elif param_ub < melhor_Q:
+            ub = param_ub
+
+        if U not in cache_Q:
+            sub, y, Cmax = cria_sub(maquinas, U, maquinas_familia, capacidade, T, P, familia_lote, None)
+            cache_Q[U] = resolve_sub(sub)
+
+        Q = cache_Q[U]
+
+        if Z > melhor_Z:
+            melhor_Z = Z
+
+        if Q < melhor_Q:
+            melhor_Q = Q
+
+        gap = ((melhor_Q - melhor_Z)/melhor_Q) * 100
+        fim_master_loop = time.time()
+        tempo_master_loop = fim_master_loop - inicio_master_loop
+
+        logger.info(f"Tempo: {tempo_master_loop}")
+        logger.info(f"Z = {Z}") 
+        logger.info(f"theta = {valor_theta}") 
+        logger.info(f"Q = {Q}")
+        logger.info(f"Gap = {gap:.2f}%")
+        logger.info(f"U = {U}")
+        logger.info(f"Número de lotes utilizados = {len(U)}")
+        logger.info("")
+
+        if Z >= Q - 1e-6 or gap <= 10 or tempo_master_loop > 10:
+            break
+
+        master.freeTransform()
+
+        master.addCons(theta >= (Q - L) * (quicksum(X[n] for n in U) - quicksum(X[n] for n in range(len(lotes_validos)) if n not in U)) - (Q - L) * (len(U) - 1) + L)
+
+
+    if param_ub == None:
+        param_ub = melhor_Q
+    
     cortes_lazy = BendersLazyCuts(
         master, X, theta, lotes_validos, maquinas, maquinas_familia,
-        capacidade, T, P, familia_lote, L, logger, param_ub
+        capacidade, T, P, familia_lote, max(L, melhor_Z), logger, min(param_ub, melhor_Q), cache_Q
     )
     master.includeConshdlr(
         cortes_lazy, "BendersLazyCuts", "cortes de Benders gerados sob demanda (lazy constraints)",
@@ -423,7 +472,7 @@ def main(nome_arquivo, param_ub=None):
 if __name__ == "__main__":
 
     resultado_alns = None
-    arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 15 jobs.txt"
+    arquivo = Path(__file__).parent.parent / "Instancias" / "Instância Teste 30 jobs.txt"
 
     main(arquivo, resultado_alns)
 
