@@ -150,7 +150,7 @@ def cria_lotes(capacidade, peso, produtos_por_familia, tempo_proc, familia_produ
         familia_lote
     )
 
-def cria_master(lotes_validos, produtos, A, L, ub):
+def cria_master(lotes_validos, produtos, A, L, ub, T):
 
     modelo = Model("Master")
     modelo.hideOutput()
@@ -159,19 +159,22 @@ def cria_master(lotes_validos, produtos, A, L, ub):
     for n in range(len(X)):
         X[n] = modelo.addVar(f"X{n}", vtype="B")
 
-    theta = modelo.addVar("theta", vtype="C", lb=L, ub=ub)
+    theta = modelo.addVar("theta", vtype="C", ub=ub)
 
     for i in range(len(produtos)):
         modelo.addCons(quicksum(X[n] * A[n][i] for n in range(len(lotes_validos))) == 1)
 
-    modelo.addCons(theta >= L)
+    # modelo.addCons(theta >= L)
+
+    for n in range(len(X)):
+        modelo.addCons(theta >= X[n] * T[n])
 
     # modelo.setObjective(quicksum(X[n] for n in range(len(lotes_validos))) + theta, "minimize")
     modelo.setObjective(theta, "minimize")
 
     return(modelo, X, theta)
 
-def cria_sub(maquinas, lotes_utilizados, maquinas_familia, capacidade, T, P, familia_lote, ub):
+def cria_sub(maquinas, lotes_utilizados, maquinas_familia, capacidade, T, P, familia_lote):
 
     modelo = Model("Sub")
     modelo.hideOutput()
@@ -181,7 +184,7 @@ def cria_sub(maquinas, lotes_utilizados, maquinas_familia, capacidade, T, P, fam
         for j in range(len(maquinas)):
             y[(u,j)] = modelo.addVar(f"Y{u},{j}", vtype="B")
 
-    Cmax = modelo.addVar("Cmax", vtype="C", lb=max(T[u] for u in lotes_utilizados), ub=ub)
+    Cmax = modelo.addVar("Cmax", vtype="C", lb=max(T[u] for u in lotes_utilizados))
 
     for u in lotes_utilizados:
         modelo.addCons(quicksum(y[(u,j)] for j in range(len(maquinas))) == 1)
@@ -235,7 +238,6 @@ class BendersLazyCuts(Conshdlr):
         self.cache_Q = cache_Q
         self.cache_LB = L
         self.cache_UB = float("inf")
-        self.ub = ub
 
     def _avalia(self, sol):
       
@@ -247,7 +249,8 @@ class BendersLazyCuts(Conshdlr):
 
         if U not in self.cache_Q:
             sub, y, Cmax = cria_sub(self.maquinas, U, self.maquinas_familia,
-                                     self.capacidade, self.T, self.P, self.familia_lote, self.ub)
+                                     self.capacidade, self.T, self.P, self.familia_lote#, self.ub
+                                     )
             self.cache_Q[U] = resolve_sub(sub)
 
         Q = self.cache_Q[U]
@@ -366,11 +369,15 @@ def main(nome_arquivo, param_ub=None):
 
     inicio = time.time()
     
-    master, X, theta = cria_master(lotes_validos, produtos, A, L, param_ub)
+    master, X, theta = cria_master(lotes_validos, produtos, A, L, param_ub, T)
     melhor_Z = 0
     melhor_Q = float("inf")
     cache_Q = {}
     inicio_master_loop = time.time()
+
+    master.freeTransform()
+    for n in range(len(X)):
+        master.addCons(theta >= X[n]*T[n])
 
     while True:
 
@@ -383,14 +390,13 @@ def main(nome_arquivo, param_ub=None):
             ub = param_ub
 
         if U not in cache_Q:
-            sub, y, Cmax = cria_sub(maquinas, U, maquinas_familia, capacidade, T, P, familia_lote, None)
+            sub, y, Cmax = cria_sub(maquinas, U, maquinas_familia, capacidade, T, P, familia_lote)
             cache_Q[U] = resolve_sub(sub)
 
         Q = cache_Q[U]
 
         if Z > melhor_Z:
             melhor_Z = Z
-
         if Q < melhor_Q:
             melhor_Q = Q
 
@@ -398,14 +404,16 @@ def main(nome_arquivo, param_ub=None):
         fim_master_loop = time.time()
         tempo_master_loop = fim_master_loop - inicio_master_loop
 
-        logger.info(f"Tempo: {tempo_master_loop}")
-        logger.info(f"Z = {Z}") 
-        logger.info(f"theta = {valor_theta}") 
-        logger.info(f"Q = {Q}")
-        logger.info(f"Gap = {gap:.2f}%")
-        logger.info(f"U = {U}")
-        logger.info(f"Número de lotes utilizados = {len(U)}")
-        logger.info("")
+        logger.info(
+            f'''Tempo: {tempo_master_loop}
+                Z = {Z}
+                theta = {valor_theta} 
+                Q = {Q}
+                Gap = {gap:.2f}%
+                U = {U}
+                Número de lotes utilizados = {len(U)}
+                '''
+                )
 
         if Z >= Q - 1e-6 or gap <= 10 or tempo_master_loop > 10:
             break
@@ -414,9 +422,12 @@ def main(nome_arquivo, param_ub=None):
 
         master.addCons(theta >= (Q - L) * (quicksum(X[n] for n in U) - quicksum(X[n] for n in range(len(lotes_validos)) if n not in U)) - (Q - L) * (len(U) - 1) + L)
 
+    #Fim do loop ---------------------------------------------------
 
     if param_ub == None:
         param_ub = melhor_Q
+
+    master.freeTransform()
     
     cortes_lazy = BendersLazyCuts(
         master, X, theta, lotes_validos, maquinas, maquinas_familia,
