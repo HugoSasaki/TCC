@@ -327,7 +327,7 @@ TSWLatexianTemp*
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
-__pycache__/
+*__pycache__/
 *.py[cod]
 *$py.class
 
@@ -671,6 +671,6 @@ pyrightconfig.json
 
 *.zip
 
-benders/Benders(IA).py
-
 !/Resultados/Benders/*.log
+
+Arquivos/
